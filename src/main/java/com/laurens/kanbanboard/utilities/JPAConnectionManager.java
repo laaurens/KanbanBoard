@@ -28,5 +28,10 @@ public class JPAConnectionManager {
 	public EntityManager getEntityManager() {
 		return entityManager;
 	}
+	
+	public void closeEntityManagerFactory() {
+		entityManager.close();
+		entityManagerFactory.close();
+	}
 
 }
