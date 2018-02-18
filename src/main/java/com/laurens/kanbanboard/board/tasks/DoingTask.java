@@ -1,5 +1,6 @@
 package com.laurens.kanbanboard.board.tasks;
 
+
 public class DoingTask {
 
 	private long doingTaskId;

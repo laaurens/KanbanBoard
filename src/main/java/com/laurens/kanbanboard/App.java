@@ -1,13 +1,12 @@
 package com.laurens.kanbanboard;
 
-/**
- * Hello world!
- *
- */
+import com.laurens.kanbanboard.utilities.DatabaseDummyData;
+
 public class App 
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        DatabaseDummyData demo = new DatabaseDummyData();
+        demo.run();
     }
 }

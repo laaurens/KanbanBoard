@@ -1,4 +1,4 @@
-package com.laurens.kanbanboard.board;
+package com.laurens.kanbanboard.user;
 
 public class User {
 

@@ -1,9 +1,11 @@
 package com.laurens.kanbanboard.board;
 
 import java.util.List;
+
 import com.laurens.kanbanboard.board.tasks.DoingTask;
 import com.laurens.kanbanboard.board.tasks.DoneTask;
 import com.laurens.kanbanboard.board.tasks.ToDoTask;
+import com.laurens.kanbanboard.user.User;
 
 public class KanbanBoard {
 
@@ -23,6 +25,22 @@ public class KanbanBoard {
 
 	public long getKanbanBoardId() {
 		return kanbanBoardId;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public List<ToDoTask> getToDoTasks() {
+		return toDoTasks;
+	}
+
+	public List<DoingTask> getDoingTasks() {
+		return doingTasks;
+	}
+
+	public List<DoneTask> getDoneTasks() {
+		return doneTasks;
 	}
 
 }
