@@ -12,6 +12,7 @@ public class KanbanBoardJPACRUD implements JPACRUDInterface<KanbanBoard> {
 	private EntityManager entityManager;
 
 	public KanbanBoardJPACRUD() {
+		this.jpaConnectionManager = JPAConnectionManager.getJPAConnectionManager("kanbanboard");
 		this.entityManager = jpaConnectionManager.getEntityManager();
 	}
 

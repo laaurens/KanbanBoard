@@ -5,11 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Entity(name="USER_TABLE")       
+@Entity(name="USERS")    
 public class User {
 
 	@Id
 	@GeneratedValue
+	@Column(name="USER_ID")
 	private int userId; 
 	
 	@Column(name="USER_NAME")

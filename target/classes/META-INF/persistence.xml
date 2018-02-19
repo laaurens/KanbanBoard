@@ -5,6 +5,7 @@
 	<persistence-unit name="kanbanboard">
 
 		<class>com.laurens.kanbanboard.user.User</class>
+		<class>com.laurens.kanbanboard.board.KanbanBoard</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="oracle.jdbc.driver.OracleDriver" />
