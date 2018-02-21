@@ -13,6 +13,8 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.laurens.kanbanboard.board.doing.DoingTask;
+import com.laurens.kanbanboard.board.done.DoneTask;
+import com.laurens.kanbanboard.board.todo.ToDoTask;
 
 @Entity(name = "USERS")
 public class User {
@@ -25,10 +27,17 @@ public class User {
 	@Column(name = "USER_NAME")
 	private String userName;
 
-
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "USER_ID")
 	private List<DoingTask> doingTasks;
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "USER_ID")
+	private List<ToDoTask> toDoTasks;
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "USER_ID")
+	private List<DoneTask> doneTasks;
 
 	public User() {
 

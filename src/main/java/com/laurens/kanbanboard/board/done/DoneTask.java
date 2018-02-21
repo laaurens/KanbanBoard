@@ -1,16 +1,44 @@
 package com.laurens.kanbanboard.board.done;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.laurens.kanbanboard.user.User;
+
+@Entity(name="Done_TASKS")
 public class DoneTask {
 	
+	@Id
+	@GeneratedValue
+	@Column(name = "DONE_TASK_ID")
 	private long doneTaskId;
-	private String discription;
+	
+	@Column(name="content")
+	private String content;
 
-	public String getDiscription() {
-		return discription;
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name = "USER_ID")
+	private User user;
+	
+	public DoneTask() {
 	}
 
-	public void setDiscription(String discription) {
-		this.discription = discription;
+	public DoneTask(User user, String content) {
+		this.user = user;
+		this.content = content;
+	}
+	
+	String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public long getToDoTaskId() {
@@ -18,6 +46,6 @@ public class DoneTask {
 	}
 
 	public String toString() {
-		return "DoneTask [Id=" + doneTaskId + ", Discription=" + discription + "]";
+		return "DoneTask [Id=" + doneTaskId + ", Content=" + content + "]";
 	}
 }

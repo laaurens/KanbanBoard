@@ -1,27 +1,45 @@
 package com.laurens.kanbanboard.board.todo;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-//@Entity(name="TODO_TASKS")
+import com.laurens.kanbanboard.user.User;
+
+@Entity(name="TODO_TASKS")
 public class ToDoTask {
 
-	//@Id
-	//@GeneratedValue
-	//@Column(name = "TODO_TASK_ID")
+	@Id
+	@GeneratedValue
+	@Column(name = "TODO_TASK_ID")
 	private long toDoTaskId;
 	
-	//@Column(name = "CONTENT")
+	@Column(name = "CONTENT")
 	private String content;
+	
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name = "USER_ID")
+	private User user;
 
-	public String getDiscription() {
+	
+	public ToDoTask() {
+	}
+
+	public ToDoTask(User user, String content) {
+		this.user = user;
+		this.content = content;
+	}
+	
+	public String getContent() {
 		return content;
 	}
 
-	public void setDiscription(String discription) {
-		this.content = discription;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public long getToDoTaskId() {
@@ -29,7 +47,7 @@ public class ToDoTask {
 	}
 	
 	public String toString() {
-		return "ToDoTask [Id=" + toDoTaskId + ", Discription=" + content + "]";
+		return "ToDoTask [Id=" + toDoTaskId + ", Content=" + content + "]";
 	}
 
 }

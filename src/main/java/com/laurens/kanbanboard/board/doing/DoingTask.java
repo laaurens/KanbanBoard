@@ -13,7 +13,7 @@ import javax.persistence.Transient;
 
 import com.laurens.kanbanboard.user.User;
 
-@Entity(name="DOING_TASK_ID")
+@Entity(name="DOING_TASKS")
 public class DoingTask {
 
 	@Id
@@ -31,17 +31,17 @@ public class DoingTask {
 	public DoingTask() {
 	}
 
-	public DoingTask(User user, String discription) {
+	public DoingTask(User user, String content) {
 		this.user = user;
-		this.content = discription;
+		this.content = content;
 	}
 
-	public String getDiscription() {
+	public String getContent() {
 		return content;
 	}
 
-	public void setDiscription(String discription) {
-		this.content = discription;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public long getToDoTaskId() {
@@ -49,6 +49,6 @@ public class DoingTask {
 	}
 
 	public String toString() {
-		return "DoingTask [Id=" + doingTaskId + ", Discription=" + content + "]";
+		return "DoingTask [Id=" + doingTaskId + ", Content=" + content + "]";
 	}
 }

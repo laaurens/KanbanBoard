@@ -2,10 +2,17 @@ package com.laurens.kanbanboard.utilities;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.hibernate.hql.internal.ast.tree.DotNode;
+
 import com.laurens.kanbanboard.board.KanbanBoard;
 import com.laurens.kanbanboard.board.KanbanBoardJPACRUD;
 import com.laurens.kanbanboard.board.doing.DoingTask;
 import com.laurens.kanbanboard.board.doing.DoingTaskJPACRUD;
+import com.laurens.kanbanboard.board.done.DoneTask;
+import com.laurens.kanbanboard.board.done.DoneTaskJPACRUD;
+import com.laurens.kanbanboard.board.todo.ToDoTaskJPACRUD;
+import com.laurens.kanbanboard.board.todo.ToDoTask;
 import com.laurens.kanbanboard.user.User;
 import com.laurens.kanbanboard.user.UserJPACRUD;
 
@@ -15,11 +22,15 @@ public class DatabaseDummyData {
 	JPACRUDInterface<User> userJPACRUD;
 	JPACRUDInterface<KanbanBoard> kanbanboardJPACRUD;
 	JPACRUDInterface<DoingTask> doingTaskJPACRUD;
-
+	JPACRUDInterface<ToDoTask> toDoTaskJPACRUD;
+	JPACRUDInterface<DoneTask> doneTaskJPACRUD;
+	
 	public DatabaseDummyData() {
 		this.userJPACRUD = new UserJPACRUD();
 		this.kanbanboardJPACRUD = new KanbanBoardJPACRUD();
 		this.doingTaskJPACRUD = new DoingTaskJPACRUD();
+		this.toDoTaskJPACRUD = new ToDoTaskJPACRUD();
+		this.doneTaskJPACRUD = new DoneTaskJPACRUD();
 		this.jpaConnectionManager = JPAConnectionManager.getJPAConnectionManager("kanbanboard");
 	}
 
@@ -42,7 +53,11 @@ public class DatabaseDummyData {
 
 		DoingTask doingTask1 = new DoingTask(user1, "Hallo dieser Eintrag ist von User1 (Laurens)");
 		DoingTask doingTask2 = new DoingTask(user2, "bla bla bla");
+		ToDoTask toDoTask1 = new ToDoTask(user1, "TO DO");
+		DoneTask doneTask1 = new DoneTask(user3, "DONE");
 		
+		toDoTaskJPACRUD.create(toDoTask1);
+		doneTaskJPACRUD.create(doneTask1);
 		doingTaskJPACRUD.create(doingTask1);
 		doingTaskJPACRUD.create(doingTask2);
 		kanbanboardJPACRUD.create(kanbanboard1);
