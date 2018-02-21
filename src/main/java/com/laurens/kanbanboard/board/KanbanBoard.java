@@ -9,13 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
-import com.laurens.kanbanboard.board.tasks.DoingTask;
-import com.laurens.kanbanboard.board.tasks.DoneTask;
-import com.laurens.kanbanboard.board.tasks.ToDoTask;
+import com.laurens.kanbanboard.board.doing.DoingTask;
+import com.laurens.kanbanboard.board.done.DoneTask;
+import com.laurens.kanbanboard.board.todo.ToDoTask;
 import com.laurens.kanbanboard.user.User;
 
 @Entity(name = "KANBANBOARDS")
@@ -30,12 +29,13 @@ public class KanbanBoard {
 	private String nameOfKanbanBoard;
 
 	@ManyToMany(cascade = CascadeType.ALL)
-	// @JoinColumn(name = "USER_ID")
-	private List<User> listOfUsers;
+	private List<User> users;
 
 	@Transient
 	private List<ToDoTask> toDoTasks;
 	@Transient
+//	@OneToMany
+//	@JoinColumn(name = "DOING_TASK_ID")
 	private List<DoingTask> doingTasks;
 	@Transient
 	private List<DoneTask> doneTasks;
@@ -46,7 +46,7 @@ public class KanbanBoard {
 
 	public KanbanBoard(String nameOfKanbanBoard, List<User> listOfUsers) {
 		this.nameOfKanbanBoard = nameOfKanbanBoard;
-		this.listOfUsers = listOfUsers;
+		this.users = listOfUsers;
 	}
 
 	public KanbanBoard(String nameOfKanbanBoard) {
@@ -66,7 +66,7 @@ public class KanbanBoard {
 	}
 
 	public List<User> getListOfUser() {
-		return listOfUsers;
+		return users;
 	}
 
 	public List<ToDoTask> getToDoTasks() {

@@ -1,4 +1,4 @@
-package com.laurens.kanbanboard.user;
+package com.laurens.kanbanboard.board.doing;
 
 import java.util.List;
 
@@ -8,45 +8,45 @@ import javax.persistence.TypedQuery;
 import com.laurens.kanbanboard.utilities.JPACRUDInterface;
 import com.laurens.kanbanboard.utilities.JPAConnectionManager;
 
-public class UserJPACRUD implements JPACRUDInterface<User> {
-
+public class DoingTaskJPACRUD implements JPACRUDInterface<DoingTask>{
+	
 	private JPAConnectionManager jpaConnectionManager;
 	private EntityManager entityManager;
 
-	public UserJPACRUD() {
+	public DoingTaskJPACRUD() {
 		this.jpaConnectionManager = JPAConnectionManager.getJPAConnectionManager("kanbanboard");
 		this.entityManager = jpaConnectionManager.getEntityManager();
 	}
 
-	public User create(User user) {
+	public DoingTask create(DoingTask doingTask) {
 		begin();
-		entityManager.persist(user);
+		entityManager.persist(doingTask);
 		commit();
-		return user;
+		return doingTask;
 	}
 
-	public boolean update(User user) {
+	public boolean update(DoingTask doingTask) {
 		begin();
-		entityManager.persist(user);
+		entityManager.persist(doingTask);
 		commit();
 		return true;
 	}
 
-	public void deleteById(User user) {
+	public void deleteById(DoingTask doingTask) {
 		begin();
-		entityManager.refresh(user);
+		entityManager.refresh(doingTask);
 		commit();
 	}
 
-	public User readOneById(long id) {
-		entityManager.find(User.class, id);
+	public DoingTask readOneById(long id) {
+		entityManager.find(DoingTask.class, id);
 		return null;
 	}
 
-	public List<User> readAll() {
-		TypedQuery<User> typedQuery = entityManager.createQuery("SELECT u FROM USER u", User.class);
-		List<User> users = typedQuery.getResultList();
-		return users;
+	public List<DoingTask> readAll() {
+		TypedQuery<DoingTask> typedQuery = entityManager.createQuery("SELECT d FROM DOING_TASKS d", DoingTask.class);
+		List<DoingTask> doingTasks = typedQuery.getResultList();
+		return doingTasks;
 	}
 
 	private void begin() {
@@ -56,4 +56,5 @@ public class UserJPACRUD implements JPACRUDInterface<User> {
 	private void commit() {
 		entityManager.getTransaction().commit();
 	}
+
 }

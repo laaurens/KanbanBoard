@@ -1,8 +1,8 @@
-package com.laurens.kanbanboard.board.tasks;
+package com.laurens.kanbanboard.board.done;
 
-public class ToDoTask {
-
-	private long toDoTaskId;
+public class DoneTask {
+	
+	private long doneTaskId;
 	private String discription;
 
 	public String getDiscription() {
@@ -14,11 +14,10 @@ public class ToDoTask {
 	}
 
 	public long getToDoTaskId() {
-		return toDoTaskId;
-	}
-	
-	public String toString() {
-		return "ToDoTask [Id=" + toDoTaskId + ", Discription=" + discription + "]";
+		return doneTaskId;
 	}
 
+	public String toString() {
+		return "DoneTask [Id=" + doneTaskId + ", Discription=" + discription + "]";
+	}
 }

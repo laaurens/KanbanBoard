@@ -6,6 +6,7 @@
 
 		<class>com.laurens.kanbanboard.user.User</class>
 		<class>com.laurens.kanbanboard.board.KanbanBoard</class>
+		<class>com.laurens.kanbanboard.board.doing.DoingTask</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="oracle.jdbc.driver.OracleDriver" />
