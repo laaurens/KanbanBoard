@@ -19,7 +19,7 @@ import com.laurens.kanbanboard.user.UserJPACRUD;
 public class DatabaseDummyData {
 
 	JPAConnectionManager jpaConnectionManager;
-	JPACRUDInterface<User> userJPACRUD;
+	UserJPACRUD userJPACRUD;
 	JPACRUDInterface<KanbanBoard> kanbanboardJPACRUD;
 	JPACRUDInterface<DoingTask> doingTaskJPACRUD;
 	JPACRUDInterface<ToDoTask> toDoTaskJPACRUD;
@@ -39,6 +39,7 @@ public class DatabaseDummyData {
 		User user2 = new User("Henning");
 		User user3 = new User("Dieter");
 		User user4 = new User("Clemens");
+		User user5 = new User("Laurens");
 
 		List<User> listOfUsers1 = new ArrayList<User>();
 		listOfUsers1.add(user1);
@@ -46,6 +47,7 @@ public class DatabaseDummyData {
 		List<User> listOfUsers2 = new ArrayList<User>();
 		listOfUsers2.add(user1);
 		listOfUsers2.add(user3);
+		listOfUsers2.add(user5);
 
 		KanbanBoard kanbanboard1 = new KanbanBoard("KanbanBoard1 ohne User");
 		KanbanBoard kanbanboard2 = new KanbanBoard("KanbanBoard2 mit L und H", listOfUsers1);
@@ -64,6 +66,13 @@ public class DatabaseDummyData {
 		kanbanboardJPACRUD.create(kanbanboard2);
 		kanbanboardJPACRUD.create(kanbanboard3);
 		userJPACRUD.create(user4);
+		
+		
+//		DEBUGG:
+		System.out.println("(USERS) READ ALL:" + userJPACRUD.readAll());
+		System.out.println("(USERS) READ ONE BY ID:" + userJPACRUD.readOneById(2)); 
+		System.out.println("(USERS) READ BY NAME:" + userJPACRUD.readByName("Henning"));
+//		
 
 		jpaConnectionManager.closeEntityManagerFactory();
 

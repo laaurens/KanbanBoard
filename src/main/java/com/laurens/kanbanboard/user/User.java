@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -16,13 +18,20 @@ import com.laurens.kanbanboard.board.doing.DoingTask;
 import com.laurens.kanbanboard.board.done.DoneTask;
 import com.laurens.kanbanboard.board.todo.ToDoTask;
 
+@NamedQueries({
+
+		@NamedQuery(name = "User.readAll", query = "SELECT u FROM USERS u"),
+		@NamedQuery(name = "User.readByName", query = "SELECT u FROM USERS u WHERE u.userName =:username")
+
+})
+
 @Entity(name = "USERS")
 public class User {
 
 	@Id
 	@GeneratedValue
 	@Column(name = "USER_ID")
-	private int userId;
+	private long userId;
 
 	@Column(name = "USER_NAME")
 	private String userName;
@@ -55,7 +64,7 @@ public class User {
 		this.userName = userName;
 	}
 
-	public int getUserId() {
+	public long getUserId() {
 		return userId;
 	}
 
