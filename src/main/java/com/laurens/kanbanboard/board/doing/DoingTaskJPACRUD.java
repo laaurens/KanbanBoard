@@ -32,9 +32,9 @@ public class DoingTaskJPACRUD implements JPACRUDInterface<DoingTask>{
 		return true;
 	}
 
-	public void deleteById(DoingTask doingTask) {
+	public void delete(DoingTask doingTask) {
 		begin();
-		entityManager.refresh(doingTask);
+		entityManager.remove(doingTask);
 		commit();
 	}
 

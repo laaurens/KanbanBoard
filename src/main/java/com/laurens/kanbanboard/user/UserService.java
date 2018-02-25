@@ -23,7 +23,7 @@ public class UserService implements ServiceInterface<User> {
 	}
 
 	public void delete(User user) {
-		userJPACRUD.deleteById(user);
+		userJPACRUD.delete(user);
 	}
 
 	public User readOneById(long id) {

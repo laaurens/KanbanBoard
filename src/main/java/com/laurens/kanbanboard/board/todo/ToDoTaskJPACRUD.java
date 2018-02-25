@@ -33,9 +33,9 @@ public class ToDoTaskJPACRUD implements JPACRUDInterface<ToDoTask>{
 		return true;
 	}
 
-	public void deleteById(ToDoTask toDoTask) {
+	public void delete(ToDoTask toDoTask) {
 		begin();
-		entityManager.refresh(toDoTask);
+		entityManager.remove(toDoTask);
 		commit();
 	}
 

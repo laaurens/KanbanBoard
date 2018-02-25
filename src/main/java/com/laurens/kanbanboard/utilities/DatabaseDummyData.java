@@ -53,10 +53,10 @@ public class DatabaseDummyData {
 		KanbanBoard kanbanboard2 = new KanbanBoard("KanbanBoard2 mit L und H", listOfUsers1);
 		KanbanBoard kanbanboard3 = new KanbanBoard("KanbanBoard3 mit L und D", listOfUsers2);
 
-		DoingTask doingTask1 = new DoingTask(user1, "Hallo dieser Eintrag ist von User1 (Laurens)");
-		DoingTask doingTask2 = new DoingTask(user2, "bla bla bla");
-		ToDoTask toDoTask1 = new ToDoTask(user1, "TO DO");
-		DoneTask doneTask1 = new DoneTask(user3, "DONE");
+		DoingTask doingTask1 = new DoingTask(user1, kanbanboard2, "Hallo dieser Eintrag ist von User1 (Laurens)");
+		DoingTask doingTask2 = new DoingTask(user2, kanbanboard3, "bla bla bla");
+		ToDoTask toDoTask1 = new ToDoTask(user1, kanbanboard1, "TO DO in kanbanboard1");
+		DoneTask doneTask1 = new DoneTask(user3, kanbanboard2,"DONE");
 		
 		toDoTaskJPACRUD.create(toDoTask1);
 		doneTaskJPACRUD.create(doneTask1);
@@ -66,12 +66,16 @@ public class DatabaseDummyData {
 		kanbanboardJPACRUD.create(kanbanboard2);
 		kanbanboardJPACRUD.create(kanbanboard3);
 		userJPACRUD.create(user4);
+		userJPACRUD.delete(user4);
+		user1.setUserName("LAURENSSSS");
+		userJPACRUD.update(user1);
 		
 		
 //		DEBUGG:
 		System.out.println("(USERS) READ ALL:" + userJPACRUD.readAll());
 		System.out.println("(USERS) READ ONE BY ID:" + userJPACRUD.readOneById(2)); 
 		System.out.println("(USERS) READ BY NAME:" + userJPACRUD.readByName("Henning"));
+		
 //		
 
 		jpaConnectionManager.closeEntityManagerFactory();

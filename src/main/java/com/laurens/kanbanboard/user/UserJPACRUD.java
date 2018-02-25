@@ -35,9 +35,15 @@ public class UserJPACRUD implements JPACRUDInterface<User> {
 		return true;
 	}
 
-	public void deleteById(User user) {
+	public void deleteById(long id) {
 		begin();
-		entityManager.refresh(user);
+		jpaQueryFactory.delete(user).where(user.userId.eq(id)).execute();		
+		commit();
+	}
+	
+	public void delete(User user) {
+		begin();
+		entityManager.remove(user);
 		commit();
 	}
 

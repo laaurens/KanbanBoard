@@ -3,6 +3,8 @@ package com.laurens.kanbanboard.board;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+
+import com.laurens.kanbanboard.user.User;
 import com.laurens.kanbanboard.utilities.JPACRUDInterface;
 import com.laurens.kanbanboard.utilities.JPAConnectionManager;
 
@@ -30,9 +32,9 @@ public class KanbanBoardJPACRUD implements JPACRUDInterface<KanbanBoard> {
 		return true;
 	}
 
-	public void deleteById(KanbanBoard kanbanBoard) {
+	public void delete(KanbanBoard kanbanBoard) {
 		begin();
-		entityManager.refresh(kanbanBoard);
+		entityManager.remove(kanbanBoard);
 		commit();
 	}
 
@@ -55,4 +57,6 @@ public class KanbanBoardJPACRUD implements JPACRUDInterface<KanbanBoard> {
 	private void commit() {
 		entityManager.getTransaction().commit();
 	}
+
+
 }

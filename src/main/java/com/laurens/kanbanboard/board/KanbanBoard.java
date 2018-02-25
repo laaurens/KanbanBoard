@@ -30,12 +30,13 @@ public class KanbanBoard {
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<User> users;
+	
 
-	@Transient
+//	@Transient
+	@OneToMany
+	@JoinColumn(name = "KANDBANBOARD_ID")
 	private List<ToDoTask> toDoTasks;
 	@Transient
-//	@OneToMany
-//	@JoinColumn(name = "DOING_TASK_ID")
 	private List<DoingTask> doingTasks;
 	@Transient
 	private List<DoneTask> doneTasks;

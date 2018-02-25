@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.laurens.kanbanboard.board.KanbanBoard;
 import com.laurens.kanbanboard.user.User;
 
 @Entity(name="TODO_TASKS")
@@ -25,13 +26,19 @@ public class ToDoTask {
 	@JoinColumn(name = "USER_ID")
 	private User user;
 
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name = "KANDBANBOARD_ID")
+	private KanbanBoard kanbanBoard;
+	
 	
 	public ToDoTask() {
 	}
 
-	public ToDoTask(User user, String content) {
+	public ToDoTask(User user, KanbanBoard kanbanBoard, String content) {
 		this.user = user;
+		this.kanbanBoard = kanbanBoard;
 		this.content = content;
+		
 	}
 	
 	public String getContent() {
