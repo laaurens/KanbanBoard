@@ -12,7 +12,7 @@ public class UserJPACRUD implements JPACRUDInterface<User> {
 	private JPAConnectionManager jpaConnectionManager;
 	private EntityManager entityManager;
 	private JPAQueryFactory jpaQueryFactory;
-	QUser user;
+	private QUser user;
 
 	public UserJPACRUD() {
 		this.jpaConnectionManager = JPAConnectionManager.getJPAConnectionManager("kanbanboard");

@@ -2,17 +2,14 @@ package com.laurens.kanbanboard.utilities;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.hibernate.hql.internal.ast.tree.DotNode;
-
 import com.laurens.kanbanboard.board.KanbanBoard;
 import com.laurens.kanbanboard.board.KanbanBoardJPACRUD;
 import com.laurens.kanbanboard.board.doing.DoingTask;
 import com.laurens.kanbanboard.board.doing.DoingTaskJPACRUD;
 import com.laurens.kanbanboard.board.done.DoneTask;
 import com.laurens.kanbanboard.board.done.DoneTaskJPACRUD;
-import com.laurens.kanbanboard.board.todo.ToDoTaskJPACRUD;
 import com.laurens.kanbanboard.board.todo.ToDoTask;
+import com.laurens.kanbanboard.board.todo.ToDoTaskJPACRUD;
 import com.laurens.kanbanboard.user.User;
 import com.laurens.kanbanboard.user.UserJPACRUD;
 
@@ -56,9 +53,11 @@ public class DatabaseDummyData {
 		DoingTask doingTask1 = new DoingTask(user1, kanbanboard2, "Hallo dieser Eintrag ist von User1 (Laurens)");
 		DoingTask doingTask2 = new DoingTask(user2, kanbanboard3, "bla bla bla");
 		ToDoTask toDoTask1 = new ToDoTask(user1, kanbanboard1, "TO DO in kanbanboard1");
+		ToDoTask toDoTask2 = new ToDoTask(user1, kanbanboard1, "TO DO2 in kanbanboard1");
 		DoneTask doneTask1 = new DoneTask(user3, kanbanboard2,"DONE");
 		
 		toDoTaskJPACRUD.create(toDoTask1);
+		toDoTaskJPACRUD.create(toDoTask2);
 		doneTaskJPACRUD.create(doneTask1);
 		doingTaskJPACRUD.create(doingTask1);
 		doingTaskJPACRUD.create(doingTask2);
@@ -75,6 +74,9 @@ public class DatabaseDummyData {
 		System.out.println("(USERS) READ ALL:" + userJPACRUD.readAll());
 		System.out.println("(USERS) READ ONE BY ID:" + userJPACRUD.readOneById(2)); 
 		System.out.println("(USERS) READ BY NAME:" + userJPACRUD.readByName("Henning"));
+		System.out.println("TODOTASK) READ ALL:" + toDoTaskJPACRUD.readAll());
+		System.out.println("DOINGTASK) READ ALL:" + doingTaskJPACRUD.readAll());
+		System.out.println("DONETASK) READ ALL:" + doneTaskJPACRUD.readAll());
 		
 //		
 

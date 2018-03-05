@@ -3,19 +3,22 @@ package com.laurens.kanbanboard.board.doing;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-
 import com.laurens.kanbanboard.utilities.JPACRUDInterface;
 import com.laurens.kanbanboard.utilities.JPAConnectionManager;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 
 public class DoingTaskJPACRUD implements JPACRUDInterface<DoingTask>{
 	
 	private JPAConnectionManager jpaConnectionManager;
 	private EntityManager entityManager;
+	private JPAQueryFactory jpaQueryFactory;
+	private QDoingTask doingTask;
 
 	public DoingTaskJPACRUD() {
 		this.jpaConnectionManager = JPAConnectionManager.getJPAConnectionManager("kanbanboard");
 		this.entityManager = jpaConnectionManager.getEntityManager();
+		this.jpaQueryFactory = jpaConnectionManager.getJPAQueryFactory();
+		this.doingTask = QDoingTask.doingTask;
 	}
 
 	public DoingTask create(DoingTask doingTask) {
@@ -37,15 +40,20 @@ public class DoingTaskJPACRUD implements JPACRUDInterface<DoingTask>{
 		entityManager.remove(doingTask);
 		commit();
 	}
+	
+	public void deleteById(long id) {
+		begin();
+		jpaQueryFactory.delete(doingTask).where(doingTask.doingTaskId.eq(id)).execute();		
+		commit();
+	}
 
 	public DoingTask readOneById(long id) {
-		entityManager.find(DoingTask.class, id);
-		return null;
+		DoingTask doingTask = entityManager.find(DoingTask.class, id);
+		return doingTask;
 	}
 
 	public List<DoingTask> readAll() {
-		TypedQuery<DoingTask> typedQuery = entityManager.createQuery("SELECT d FROM DOING_TASKS d", DoingTask.class);
-		List<DoingTask> doingTasks = typedQuery.getResultList();
+		List<DoingTask> doingTasks = jpaQueryFactory.selectFrom(doingTask).fetch();
 		return doingTasks;
 	}
 

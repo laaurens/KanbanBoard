@@ -3,8 +3,6 @@ package com.laurens.kanbanboard.board;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-
-import com.laurens.kanbanboard.user.User;
 import com.laurens.kanbanboard.utilities.JPACRUDInterface;
 import com.laurens.kanbanboard.utilities.JPAConnectionManager;
 

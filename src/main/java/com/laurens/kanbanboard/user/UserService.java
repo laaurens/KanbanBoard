@@ -1,7 +1,6 @@
 package com.laurens.kanbanboard.user;
 
 import java.util.List;
-
 import com.laurens.kanbanboard.utilities.ServiceInterface;
 
 public class UserService implements ServiceInterface<User> {

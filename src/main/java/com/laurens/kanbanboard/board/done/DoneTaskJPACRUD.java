@@ -1,22 +1,24 @@
 package com.laurens.kanbanboard.board.done;
 
 import java.util.List;
-
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-
-
 import com.laurens.kanbanboard.utilities.JPACRUDInterface;
 import com.laurens.kanbanboard.utilities.JPAConnectionManager;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 
 public class DoneTaskJPACRUD implements JPACRUDInterface<DoneTask> {
 
 	private JPAConnectionManager jpaConnectionManager;
 	private EntityManager entityManager;
+	private JPAQueryFactory jpaQueryFactory;
+	private QDoneTask doneTask;
 
 	public DoneTaskJPACRUD() {
 		this.jpaConnectionManager = JPAConnectionManager.getJPAConnectionManager("kanbanboard");
 		this.entityManager = jpaConnectionManager.getEntityManager();
+		this.jpaQueryFactory = jpaConnectionManager.getJPAQueryFactory();
+		this.doneTask = QDoneTask.doneTask;
+		
 	}
 
 	public DoneTask create(DoneTask doingTask) {
@@ -40,13 +42,12 @@ public class DoneTaskJPACRUD implements JPACRUDInterface<DoneTask> {
 	}
 
 	public DoneTask readOneById(long id) {
-		entityManager.find(DoneTask.class, id);
-		return null;
+		DoneTask doneTask = entityManager.find(DoneTask.class, id);
+		return doneTask;
 	}
 
 	public List<DoneTask> readAll() {
-		TypedQuery<DoneTask> typedQuery = entityManager.createQuery("SELECT d FROM DONE_TASKS d", DoneTask.class);
-		List<DoneTask> doneTasks = typedQuery.getResultList();
+		List<DoneTask> doneTasks = jpaQueryFactory.selectFrom(doneTask).fetch();
 		return doneTasks;
 	}
 

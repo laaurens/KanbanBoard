@@ -1,22 +1,23 @@
 package com.laurens.kanbanboard.board.todo;
 
 import java.util.List;
-
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-
-
 import com.laurens.kanbanboard.utilities.JPACRUDInterface;
 import com.laurens.kanbanboard.utilities.JPAConnectionManager;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 
 public class ToDoTaskJPACRUD implements JPACRUDInterface<ToDoTask>{
 
 	private JPAConnectionManager jpaConnectionManager;
 	private EntityManager entityManager;
+	private JPAQueryFactory jpaQueryFactory;
+	private QToDoTask toDoTask;
 
 	public ToDoTaskJPACRUD() {
 		this.jpaConnectionManager = JPAConnectionManager.getJPAConnectionManager("kanbanboard");
 		this.entityManager = jpaConnectionManager.getEntityManager();
+		this.jpaQueryFactory = jpaConnectionManager.getJPAQueryFactory();
+		this.toDoTask = QToDoTask.toDoTask;
 	}
 
 	public ToDoTask create(ToDoTask toDoTask) {
@@ -40,13 +41,12 @@ public class ToDoTaskJPACRUD implements JPACRUDInterface<ToDoTask>{
 	}
 
 	public ToDoTask readOneById(long id) {
-		entityManager.find(ToDoTask.class, id);
-		return null;
+		ToDoTask toDoTask = entityManager.find(ToDoTask.class, id);
+		return toDoTask;
 	}
 
 	public List<ToDoTask> readAll() {
-		TypedQuery<ToDoTask> typedQuery = entityManager.createQuery("SELECT d FROM TODO_TASKS d", ToDoTask.class);
-		List<ToDoTask> toDoTasks = typedQuery.getResultList();
+		List<ToDoTask> toDoTasks = jpaQueryFactory.selectFrom(toDoTask).fetch();
 		return toDoTasks;
 	}
 
